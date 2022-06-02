@@ -41,56 +41,45 @@ else:
     x_j= [0.1488743389816312108848260,0.4333953941292471907992659, 0.6794095682990244062343274, 0.8650633666889845107320967, 0.9739065285171717200779640]
     w_j= [0.2955242247147528701738930, 0.2692667193099963550912269, 0.2190863625159820439955349, 0.1494513491505805931457763, 0.0666713443086881375935688]
 
+#Tratando os dados
+x_j_copy = x_j.copy()
+w_j_copy = w_j.copy()
+for i in range(len(x_j)):
+    index = -1-i
+    x_j_copy.append((x_j[index])*(-1))
+    w_j_copy.append(w_j[index])
+x_j=x_j_copy
+w_j=w_j_copy
+print(x_j)
+print(w_j)
 sum_functions_y = []
-i = 0
-while i < n:
-    if i < n/2:
-        loop_x_j = str(x_j[i])
-        loop_w_j = str(w_j[i])
-        x_i = "(1/2)*((y_sup - y_inf)*"+loop_x_j+"+(y_sup + y_inf))"
-        newfunction = function.replace('y', x_i)+"*"+loop_w_j+"*(y_sup - y_inf)/2"
-        sum_functions_y.append(newfunction)
-    else:
-        index = int((n/2)-i-1)
-        loop_x_j = str(x_j[index]*(-1))
-        loop_w_j = str(w_j[index])
+for i in range(len(x_j)):
+    x_i = '(1/2)*(((y_sup - y_inf)*('+str(x_j[i])+'))+(y_sup + y_inf))'
+    new_function = function
+    new_function = '('+new_function.replace('y', x_i)+')*((y_sup - y_inf)/2)*'+str(w_j[i])
+    sum_functions_y.append(new_function)
 
-        x_i = "(1/2)*((y_sup - y_inf)*"+loop_x_j+"+(y_sup + y_inf))"
-        newfunction = function.replace('y', x_i)+"*"+loop_w_j+"*(y_sup - y_inf)/2"
-        sum_functions_y.append(newfunction)
-    i = i + 1
-
-#Mapeando o valor de xi e substituindo na fórmula
-x_j_map = []
 sum_functions_x = []
-for j in range(len(sum_functions_y)):
-    i=0
-    while i < n:
-        if i < n/2:
-            loop_x_j = str(x_j[i])
-            print(loop_x_j)
-            loop_w_j = str(w_j[i])
-            x_i = "(1/2)*((x_sup - x_inf)*"+loop_x_j+"+(x_sup + x_inf))"
-            newfunction = sum_functions_y[i].replace('x', x_i)+"*"+loop_w_j+"*(x_sup - x_inf)/2"
-            sum_functions_x.append(newfunction)
-            x_j_map.append(eval(x_i))
-        else:
-            index = int((n/2)-i-1)
-            loop_x_j = str(x_j[index]*(-1))
-            print(loop_x_j)
-            loop_w_j = str(w_j[index])
-
-            x_i = "(1/2)*((x_sup - x_inf)*"+loop_x_j+"+(x_sup + x_inf))"
-            newfunction = sum_functions_y[index].replace('x', x_i)+"*"+loop_w_j+"*(x_sup - x_inf)/2"
-            sum_functions_x.append(newfunction)
-            x_j_map.append(eval(x_i))
-        i = i + 1
-
+x_i_map=[]
+for i in range(len(sum_functions_y)):
+    for i in range(len(x_j)):
+        x_i = '(1/2)*(((x_sup - x_inf)*('+str(x_j[i])+'))+(x_sup + x_inf))'
+        new_function = sum_functions_y[i]
+        new_function = new_function.replace('y_sup', y_sup)
+        new_function = new_function.replace('y_inf', y_inf)
+        print(new_function)
+        new_function = '('+new_function.replace('x', x_i)+')*((x_sup - x_inf)/2)*'+str(w_j[i])
+        sum_functions_x.append(new_function)
+        x_i_map.append(x_i)
+        
 geral_result = 0
+
 for i in range(len(sum_functions_x)):
     f_calc = sum_functions_x[i]
+    x=x_i_map[i]
+    expression = eval(f_calc)
 
-    geral_result = geral_result + final_calculate(x_sup, x_inf, y_sup, y_inf, f_calc, x_j_map[i], n)
+    geral_result = geral_result + expression
     print(geral_result)
 
 print(geral_result)
