@@ -1,3 +1,5 @@
+from math import *
+
 def value_function(function, x):
     new_function = eval(function)
     value = new_function
@@ -47,9 +49,9 @@ for i in range(len(x_j)):
     new_yinf_value = value_function(y_inf, x_x_i)
     y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_x_i)+(new_ysup_value + new_yinf_value))
     new_function = '('+function.replace('y', str(y_x_i))+')*'+str(((new_ysup_value - new_yinf_value)/2)*w_j[i])
+    print(new_function)
     for j in range(len(x_j)):
         x_x_i = c*x_j[j] + d
         x_new_function = value_function(new_function, x_x_i)*((x_sup-x_inf)/2)*w_j[j]
-        print(x_new_function)
         total_value = total_value + x_new_function
-print(total_value)
+print(f'O valor da sua integral é: {total_value}')
