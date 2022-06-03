@@ -58,28 +58,25 @@ for i in range(len(x_j)):
     new_function = function
     new_function = '('+new_function.replace('y', x_i)+')*((y_sup - y_inf)/2)*'+str(w_j[i])
     sum_functions_y.append(new_function)
-
 sum_functions_x = []
 x_i_map=[]
 for i in range(len(sum_functions_y)):
     for i in range(len(x_j)):
-        x_i = '(1/2)*(((x_sup - x_inf)*('+str(x_j[i])+'))+(x_sup + x_inf))'
+        x_i = str(eval('(1/2)*(((x_sup - x_inf)*('+str(x_j[i])+'))+(x_sup + x_inf))'))
         new_function = sum_functions_y[i]
         new_function = new_function.replace('y_sup', y_sup)
         new_function = new_function.replace('y_inf', y_inf)
-        print(new_function)
-        new_function = '('+new_function.replace('x', x_i)+')*((x_sup - x_inf)/2)*'+str(w_j[i])
+        new_function = str(eval('('+new_function.replace('x', x_i)+')*((x_sup - x_inf)/2)*'+str(w_j[i])))
         sum_functions_x.append(new_function)
+        print(new_function)
         x_i_map.append(x_i)
         
 geral_result = 0
-
 for i in range(len(sum_functions_x)):
     f_calc = sum_functions_x[i]
     x=x_i_map[i]
     expression = eval(f_calc)
 
     geral_result = geral_result + expression
-    print(geral_result)
 
 print(geral_result)

@@ -1,4 +1,4 @@
-from math import *
+'''from math import *
 from data import final_calculate
 
 names = {'sqrt': sqrt, 'pow': pow}
@@ -93,4 +93,4 @@ for i in range(len(sum_functions_x)):
     geral_result = geral_result + final_calculate(x_sup, x_inf, y_sup, y_inf, f_calc, x_j_map[i], n)
     print(geral_result)
 
-print(geral_result)
+print(geral_result)'''
