@@ -47,9 +47,8 @@ for i in range(len(x_j)):
     x_x_i = c*x_j[i] + d
     new_ysup_value = value_function(y_sup, x_x_i)
     new_yinf_value = value_function(y_inf, x_x_i)
-    y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_x_i)+(new_ysup_value + new_yinf_value))
-    new_function = '('+function.replace('y', str(y_x_i))+')*'+str(((new_ysup_value - new_yinf_value)/2)*w_j[i])
-    print(new_function)
+    y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_j[i])+(new_ysup_value + new_yinf_value))
+    new_function = '('+transform_y(function, str(y_x_i))+')*'+str(((new_ysup_value - new_yinf_value)/2)*w_j[i])
     for j in range(len(x_j)):
         x_x_i = c*x_j[j] + d
         x_new_function = value_function(new_function, x_x_i)*((x_sup-x_inf)/2)*w_j[j]
