@@ -37,38 +37,22 @@ x_sup = float(input('Digite o valor superior do intervalo externo: '))
 y_inf = str(input('Digite o valor inferior do intervalo interno: '))
 y_sup = str(input('Digite o valor superior do intervalo interno: '))
 
-validation = True
-count = False
-loop_validation = 's'
-while validation == True:
-    if count == True:
-        loop_validation = input("Gostaria de analisar para outros nós?: (6/8/10) \n Responda com 's' para sim e 'n' para não. \n ")
-    if loop_validation == 's':
-        n_validation = True
-        while n_validation == True:
-            n = int(input('Digite quantos nós você gostaria de analisar: (6/8/10) '))
-            if n == 6 or n == 8 or n == 10:
-                n_validation = False
-            else: 
-                print('Digite um número válido')
-        x_j, w_j = nodules_analisys(n)
-        total_value = 0
-        c = (x_sup - x_inf)/2
-        d = (x_sup + x_inf)/2
-        for i in range(len(x_j)):
-            x_x_i = c*x_j[i] + d
-            new_ysup_value = value_function(y_sup, x_x_i)
-            new_yinf_value = value_function(y_inf, x_x_i)
-            y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_j[i])+(new_ysup_value + new_yinf_value))
-            new_function = '(('+str(y_sup)+'-'+ str(y_inf) +')/2)'+'*'+str(w_j[i])+'*('+transform_y(function, str(y_x_i))+')'
-            for j in range(len(x_j)):
-                x_x_i = c*x_j[j] + d
-                x_new_function = value_function(new_function, x_x_i)*((x_sup-x_inf)/2)*w_j[j]
-                total_value = total_value + x_new_function
-        print(f'\n O valor da sua integral é: \033[7;37;40m {"%.5f" % total_value} \033[m\n')
-        count = True
-        
-    else:
-        validation = False
+n = int(input('Digite quantos nós você gostaria de analisar: '))
+x_j, w_j = nodules_analisys(n)
 
-input()
+
+
+total_value = 0
+c = (x_sup-x_inf)/2
+d = (x_sup + x_inf)/2
+for i in range(len(x_j)):
+    x_x_i = c*x_j[i] + d
+    new_ysup_value = value_function(y_sup, x_x_i)
+    new_yinf_value = value_function(y_inf, x_x_i)
+    y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_j[i])+(new_ysup_value + new_yinf_value))
+    new_function = '('+transform_y(function, str(y_x_i))+')*'+str(((new_ysup_value - new_yinf_value)/2)*w_j[i])
+    for j in range(len(x_j)):
+        x_x_i = c*x_j[j] + d
+        x_new_function = value_function(new_function, x_x_i)*((x_sup-x_inf)/2)*w_j[j]
+        total_value = total_value + x_new_function
+print(f'O valor da sua integral é: {total_value}')

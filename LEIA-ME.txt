@@ -1,0 +1,21 @@
+O programa possui uma estrutura simples de funcionamento
+- Incialmente é necessário abrir o programa de nome "index.py".
+- Este irá pedir que o usuário digite a função que será integrada.
+- Seguidamente o usuário deve adicionar os valores dos intervalos da integral dupla.
+(Lembre-se, o intervalo externo é composto de números, caso seja introduzido uma string o programa 
+acusará erro)). Um bom exemplo seria:
+"0
+1
+x
+2*x"
+- Assim, iniciaremos o processo de integração de Gauss, sendo necessário escolher a quanidade de
+nós que será utilizado. As opções são de 6, 8, 10.
+(Caso o usuário introduza algo diferente dos já citados o programa abre a possibilidade de uma nova
+aquisição)
+- Assim, o programa irá exibir o valor da integral para a função mencionada com os respectivos intervalos
+
+OBSERVAÇÕES:
+- A expressão introduzida deve estar em função de x e y. Qualquer outra variável que for introduzida o
+arquivo apresentará erro.
+- Alguns valores de integrais introduzidas podem apresentar arredondamentos ou diferenças de até 0.1 do
+valor exato. Isso ocorre devido ao arredondamento de número de algarísmos significativos.
