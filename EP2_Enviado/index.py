@@ -56,16 +56,15 @@ while validation == True:
         c = (x_sup - x_inf)/2
         d = (x_sup + x_inf)/2
         for i in range(len(x_j)):
-            x_x_i = c*x_j[i] + d
-            new_ysup_value = value_function(y_sup, x_x_i)
-            new_yinf_value = value_function(y_inf, x_x_i)
-            y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_j[i])+(new_ysup_value + new_yinf_value))
-            new_function = '(('+str(y_sup)+'-'+ str(y_inf) +')/2)'+'*'+str(w_j[i])+'*('+transform_y(function, str(y_x_i))+')'
             for j in range(len(x_j)):
                 x_x_i = c*x_j[j] + d
+                new_ysup_value = value_function(y_sup, x_x_i)
+                new_yinf_value = value_function(y_inf, x_x_i)
+                y_x_i = (1/2)*(((new_ysup_value - new_yinf_value)*x_j[i])+(new_ysup_value + new_yinf_value))
+                new_function = '(('+str(y_sup)+'-'+ str(y_inf) +')/2)'+'*'+str(w_j[i])+'*('+transform_y(function, str(y_x_i))+')'
                 x_new_function = value_function(new_function, x_x_i)*((x_sup-x_inf)/2)*w_j[j]
                 total_value = total_value + x_new_function
-        print(f'\n O valor da sua integral é: \033[7;37;40m {"%.5f" % total_value} \033[m\n')
+        print(f'\n O valor da sua integral é: {"%.5f" % total_value}\n')
         count = True
         
     else:

@@ -254,3 +254,5 @@ if __name__ == "__main__":
     ex_2()
     ex_3()
     ex_4()
+
+input()
